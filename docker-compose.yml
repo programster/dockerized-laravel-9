@@ -45,7 +45,7 @@ services:
 
 
   db:
-    image: postgres:13.0
+    image: postgres:14.1-bullseye
     container_name: db
     restart: always
     volumes:
