@@ -1,0 +1,78 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: app
+    image: ${DOCKER_IMAGE_NAME}
+    restart: always
+    ports:
+      - "80:80"
+#      - "443:443"
+    depends_on:
+        - db
+    volumes:
+      - laravel-logs:/var/www/site/storage/logs
+    environment:
+      - APP_ENV=${ENVIRONMENT}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_NAME=${APP_NAME}
+      - APP_URL=${APP_URL}
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=${DB_DRIVER}
+      - DB_HOST=${DB_HOST}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - MAIL_MAILER=${MAIL_MAILER}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION}
+      - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}
+      - MAIL_FROM_NAME=${MAIL_FROM_NAME}
+      - BROADCAST_DRIVER=${BROADCAST_DRIVER}
+      - CACHE_DRIVER=${CACHE_DRIVER}
+      - FILESYSTEM_DRIVER=${FILESYSTEM_DRIVER}
+      - QUEUE_CONNECTION=${QUEUE_CONNECTION}
+      - SESSION_DRIVER=${SESSION_DRIVER}
+      - SESSION_LIFETIME=${SESSION_LIFETIME}
+      - HOST_USER_ID=${DOCKER_HOST_USER_ID}
+      - HOST_GROUP_ID=${DOCKER_HOST_GROUP_ID}
+
+
+  db:
+    image: postgres:13.0
+    container_name: db
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+
+# Uncomment this if you wish to make use of meilisearch
+# with Laravel Scout
+# https://laravel.com/docs/8.x/scout
+#  meilisearch:
+#    image: getmeili/meilisearch:v0.19.0
+#    restart: always
+#    volumes:
+#      - meilidata:/data.ms
+#    env_file:
+#      - ./.env
+
+
+volumes:
+  db:
+    driver: local
+  laravel-logs:
+    driver: local
+#  meilidata:
+#    driver: local
+
