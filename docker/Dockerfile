@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y software-properties-common apt-transpor
 
 # Install the relevant packages
 RUN apt-get install -y \
-  vim apache2 libapache2-mod-php8.0 curl git cron supervisor \
+  vim apache2 libapache2-mod-php8.1 curl git cron supervisor \
   php8.1-mysqlnd php8.1-pgsql php8.1-curl php8.1-zip php8.1-xml php8.1-zip \
   php8.1-pdo php8.1-mbstring
 
@@ -34,15 +34,15 @@ EXPOSE 443
 # - increase max POST size
 # - increate max upload file size
 # - set max execution and input time to 5 minutes. (you may wish to adjust.)
-RUN  sed -i 's;memory_limit = .*;memory_limit = -1;' /etc/php/8.0/apache2/php.ini \
-  && sed -i 's;memory_limit = .*;memory_limit = -1;' /etc/php/8.0/cli/php.ini \
-  && sed -i 's;display_errors = .*;display_errors = On;' /etc/php/8.0/apache2/php.ini \
-  && sed -i 's;display_errors = .*;display_errors = On;' /etc/php/8.0/cli/php.ini \
-  && sed -i 's;post_max_size = .*;post_max_size = 4000M;' /etc/php/8.0/apache2/php.ini \
-  && sed -i 's;upload_max_filesize = .*;upload_max_filesize = 2000M;' /etc/php/8.0/apache2/php.ini \
-  && sed -i 's;max_execution_time = .*;max_execution_time = 300;' /etc/php/8.0/apache2/php.ini \
-  && sed -i 's;max_execution_time = .*;max_execution_time = 300;' /etc/php/8.0/cli/php.ini \
-  && sed -i 's;max_input_time = .*;max_input_time = 300;' /etc/php/8.0/apache2/php.ini
+RUN  sed -i 's;memory_limit = .*;memory_limit = -1;' /etc/php/8.1/apache2/php.ini \
+  && sed -i 's;memory_limit = .*;memory_limit = -1;' /etc/php/8.1/cli/php.ini \
+  && sed -i 's;display_errors = .*;display_errors = On;' /etc/php/8.1/apache2/php.ini \
+  && sed -i 's;display_errors = .*;display_errors = On;' /etc/php/8.1/cli/php.ini \
+  && sed -i 's;post_max_size = .*;post_max_size = 4000M;' /etc/php/8.1/apache2/php.ini \
+  && sed -i 's;upload_max_filesize = .*;upload_max_filesize = 2000M;' /etc/php/8.1/apache2/php.ini \
+  && sed -i 's;max_execution_time = .*;max_execution_time = 300;' /etc/php/8.1/apache2/php.ini \
+  && sed -i 's;max_execution_time = .*;max_execution_time = 300;' /etc/php/8.1/cli/php.ini \
+  && sed -i 's;max_input_time = .*;max_input_time = 300;' /etc/php/8.1/apache2/php.ini
 
 # Manually set the apache environment variables in order to get apache to work immediately.
 ENV APACHE_RUN_USER www-data
