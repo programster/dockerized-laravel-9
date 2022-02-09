@@ -52,6 +52,7 @@ function main(string $outputFilepath)
 
         if (in_array($parts[0], ALL_VARS))
         {
+            // Handle situations where the user has spaces in variable name, through the use of quotes.
             if (strpos($parts[1], " ") !== false)
             {
                 $filteredLines[$parts[0]] = "$parts[0]=\"$parts[1]\"";
