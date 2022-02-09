@@ -1,2 +1,5 @@
 .env
 site/vendor
+
+# Ignore any PHPStorm IDE configuration files
+.idea
