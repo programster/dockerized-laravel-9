@@ -20,9 +20,9 @@ for the site so that changes to the take effect immediately without needint to r
 ## Services
 
 ### PostgreSQL
-This codebase is set up to deploy and use a PostgreSQL database. MySQL and MariaDB is more commonly 
-used in the PHP
-world but I find the PostgreSQL has too many useful features to be ignored. Primarily:
+This codebase is set up to deploy and use a PostgreSQL database. MySQL and MariaDB are more commonly 
+used in the PHP world, but I find the PostgreSQL has too many useful features to be ignored. 
+Primarily:
 
  * [Native UUID type](https://www.postgresql.org/docs/9.1/datatype-uuid.html)
  * [Parallel queries](https://blog.programster.org/postgresql-parallel-queries).
