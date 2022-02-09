@@ -9,6 +9,9 @@ indent_size = 4
 trim_trailing_whitespace = true
 max_line_length = 120
 
+[*.{env,env.example}]
+max_line_length = 100
+
 [*.md]
 trim_trailing_whitespace = false
 max_line_length = 100
