@@ -56,6 +56,18 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
 
 
+  # Mailhog fake SMTP server
+  # https://github.com/mailhog/MailHog
+  mailhog: 
+    container_name: mailhog
+    image: mailhog/mailhog
+    logging:
+        driver: 'none'  # disable saving logs
+    ports:
+        - 1025:1025 # smtp server
+        - 8025:8025 # web ui
+
+
 # Uncomment this if you wish to make use of meilisearch
 # with Laravel Scout
 # https://laravel.com/docs/8.x/scout

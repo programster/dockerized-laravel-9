@@ -46,7 +46,7 @@ services:
 
 
   db:
-    image: postgres:13.0
+    image: postgres:14.1-bullseye
     container_name: db
     restart: always
     volumes:
@@ -55,6 +55,18 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+
+  # Mailhog fake SMTP server
+  # https://github.com/mailhog/MailHog
+  mailhog: 
+    container_name: mailhog
+    image: mailhog/mailhog
+    logging:
+        driver: 'none'  # disable saving logs
+    ports:
+        - 1025:1025 # smtp server
+        - 8025:8025 # web ui
 
 
 # Uncomment this if you wish to make use of meilisearch
