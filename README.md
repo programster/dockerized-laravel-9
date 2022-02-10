@@ -43,6 +43,26 @@ container to keep it running. Use the cron service when you wish for a script to
 point in time. For everything else, I would advise using [Supervisor](http://supervisord.org/).
 
 
+### MailHog
+Mailhog is configured in the `docker-compose.yml` and `docker-dev-compose.yml` files for
+you to easily test/dev emails without having to hook up to an actual SMTP server. To test
+that this works, you can do the following:
+
+1. Enter the app container with: `docker exec -it app /bin/bash`
+2. Run the artisan tinker tool: `php artisan tinker`
+3. Get Laravel to send an email: with:
+  ```bash
+  $callback = function($msg) {
+      $msg->to('myemail@gmail.com')
+          ->subject('Test Email')
+          ->from('anotherEmail@gmail.com');
+  };
+
+  Mail::raw('Hello World!', $callback);
+  ```
+4. Navigate to [http://localhost:8025/](http://localhost:8025/) in your browser to view the emails.
+
+
 ## Extra Info
 
 ### HTTPS / SSL
@@ -52,4 +72,3 @@ tweak your apapche configuration to make use of it as well as adding `RUN a2enmo
 Dockerfile, but you may wish to 
 [use a reverse proxy](https://blog.programster.org/jwilder-reverse-proxy-with-wildcard-ssl) or have 
 something set up with AWS etc.
-
