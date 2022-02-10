@@ -51,7 +51,7 @@ that this works, you can do the following:
 1. Enter the app container with: `docker exec -it app /bin/bash`
 2. Run the artisan tinker tool: `php artisan tinker`
 3. Get Laravel to send an email: with:
-  ```bash
+  ```php
   $callback = function($msg) {
       $msg->to('myemail@gmail.com')
           ->subject('Test Email')
